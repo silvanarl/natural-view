@@ -34,8 +34,7 @@ export default async function ObservationDetail({
                                 src={photoUrl}
                                 alt={commonName}
                                 className="object-contain rounded-lg"
-                                width={50}
-                                height={50}
+                                fill
                             />
 
 
