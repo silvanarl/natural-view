@@ -15,6 +15,24 @@ interface Observation {
     photos: Photo[];
 }
 
+interface SpeciesCount {
+    count: number;
+    taxon: Taxon;
+}
+
+interface SpeciesCountsResponse {
+    total_results: number;
+    page: number;
+    per_page: number;
+    results: SpeciesCount[];
+}
+interface TaxonResponse {
+    total_results: number;
+    page: number;
+    per_page: number;
+    results: Taxon[];
+}
+
 interface Taxon {
     provisional: boolean;
     endemic: boolean;
@@ -41,6 +59,7 @@ interface Taxon {
     universal_search_rank: number;
     wikipedia_url: string;
     iconic_taxon_name: string;
+    wikipedia_summary: string | null;
 }
 interface Photo {
     id: number;

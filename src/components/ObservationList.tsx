@@ -1,10 +1,10 @@
 
-import { getObservations } from '@/lib/api';
+import { getObservations, getObservationsSpeciesCount } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default async function ObservationsList({ page, perPage }: { page: number; perPage: number }) {
-    const observations = await getObservations(page, perPage);
+    const observations = await getObservationsSpeciesCount(page, perPage);
 
     const MAX_RESULTS = 10000;
     const maxPage = Math.floor(MAX_RESULTS / perPage);
@@ -15,10 +15,10 @@ export default async function ObservationsList({ page, perPage }: { page: number
         <div>
             {observations.results.map((obs) => {
                 const commonName = obs.taxon?.preferred_common_name ?? obs.taxon?.name;
-                const photoUrl = obs.photos[0]?.url ?? obs.taxon?.default_photo?.url;
+                const photoUrl = obs.taxon?.default_photo?.url;
 
                 return (
-                    <Link key={obs.id} href={`/observations/${obs.id}`}>
+                    <Link key={obs.taxon.id} href={`/species/${obs.taxon.id}`}>
                         <div className="flex  gap-4 flex-col ">
                             <p className="text-lg font-semibold text-gray-800">{commonName}</p>
                             {photoUrl ? (
