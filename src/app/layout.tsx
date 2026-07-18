@@ -1,17 +1,14 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
+import { ThemeProvider } from 'next-themes';
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import "./globals.css";
+import { Source_Serif_4, Inter, IBM_Plex_Mono } from 'next/font/google';
+import Header from "@/components/Header";
+
+const serif = Source_Serif_4({ subsets: ['latin'], variable: '--font-serif' });
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: '500', variable: '--font-mono' });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,9 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${serif.variable} ${sans.variable} ${mono.variable} antialiased bg-[#FAF7F0] dark:bg-[#1B1F1C] text-[#2B2A28] dark:text-[#EDEAE3] min-h-screen`}
       >
-        {children}
+        <ThemeProvider attribute='class'>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

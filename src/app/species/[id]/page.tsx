@@ -10,7 +10,6 @@ export default async function SpeciesDetail({
 }) {
     const { id } = await params;
     const data = await getTaxon(Number(id));
-    console.log("Taxon interna", data);
     const taxon = data.results[0];
 
     if (!taxon) {
